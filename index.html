@@ -1,0 +1,61 @@
+<html>
+<head>
+	
+</head>
+	<body>
+		<div id="game_canvas">
+
+		
+		</div>
+		<script src = "jquery.min.js"></script>
+		<script src = "phaser.min.js"></script>
+	
+		<script>
+
+		var game;
+		var sprite;
+
+			$(document).ready(function(){
+
+				game = new  Phaser.Game(640, 480, Phaser.AUTO, 'game_canvas', {
+					preload : preload,
+					create : create,
+					update : update
+
+				});
+
+				function preload () {
+
+					game.load.image('card','download.png');
+
+				}
+
+				function create() {
+
+					this.delay = 1000;
+					this.spawn = 0;
+
+					sprite = game.add.sprite(game.width/4, game.height/4, 'card');
+
+				}
+
+				function update() {
+
+					console.log(this.spawn > game.time.now);
+
+					if (this.spawn > game.time.now) {
+						return;
+					}
+
+					this.spawn = game.time.now + this.delay;
+
+					sprite.scale.x *= -1;
+
+				}
+
+			});
+
+		</script>
+
+	</body>
+</html>
